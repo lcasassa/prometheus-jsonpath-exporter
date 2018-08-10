@@ -19,7 +19,8 @@ class JsonPathCollector(object):
 
   def collect(self):
     config = self._config
-    result = json.loads(urllib2.urlopen(config['json_data_url'], timeout=10).read())
+    request = urllib2.Request(config['json_data_url'], headers={"User-Agent": "curl/7.54.0"})
+    result = json.loads(urllib2.urlopen(request, timeout=10).read())
     result_tree = Tree(result)
     for metric_config in config['metrics']:
       metric_name = "{}_{}".format(config['metric_name_prefix'], metric_config['name'])
