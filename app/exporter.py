@@ -26,7 +26,7 @@ class JsonPathCollector(object):
       metric_name = "{}_{}".format(config['metric_name_prefix'], metric_config['name'])
       metric_description = metric_config.get('description', '')
       metric_path = metric_config['path']
-      value = result_tree.execute(metric_path)
+      value = float(result_tree.execute(metric_path))
       logging.debug("metric_name: {}, value for '{}' : {}".format(metric_name, metric_path, value))
       metric = GaugeMetricFamily(metric_name, metric_description, value=value)
       yield metric
